@@ -1,0 +1,120 @@
+/* التنسيق المشترك لجميع الروابط لضمان ظهورها كبلوكات ممركزة */
+.link-item {
+    display: block;
+    width: 80%;
+    padding: 20px;
+    margin: 10px 0;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    border: 1px solid #000;
+}
+
+/* --- الألوان المخصصة التي طلبتها --- */
+
+.custom-link1 {
+    background-color: #90ee90;   /* light green */
+    color: #8b0000;              /* dark red */
+}
+
+.custom-link2 {
+    background-color: #555555;   /* dark gray */
+    color: #ffff00;              /* yellow */
+}
+
+.custom-link3 {
+    background-color: #000000;   /* black */
+    color: #ffff00;              /* yellow */
+}
+
+/* --- حالات الروابط (States) --- */
+
+.link-item:hover {
+    opacity: 0.8; /* تأثير بسيط عند تمرير الماوس */
+}
+
+.link-item:active {
+    background-color: #ccc; /* يتغير عند الضغط */
+    color: red;
+}
+
+/* --- تنسيقات إضافية لبقية صفحات اللاب (قوائم وجداول) --- */
+
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+h1.formatting-title {
+    background-color: #e0ffe0;
+    padding: 20px;
+    
+    color: #006400;
+    margin: 20px 0;
+    border-radius: 8px;
+}
+h1.Listing-title {
+    background-color: #20b2aa;   /* teal */
+    color: white;
+    padding: 18px;
+    
+    margin: 20px 0;
+    border-radius: 8px;
+}
+/* --- تنسيق الجداول النهائي والمضمون --- */
+
+/* 1. توسيط العناوين */
+h3, .table-title {
+    text-align: center;
+    margin: 30px auto 10px auto;
+    font-family: Arial, sans-serif;
+}
+
+/* 2. التنسيق المشترك لكل الجداول */
+.lab-table {
+    margin: 10px auto; /* لتوسيط الجداول في الصفحة */
+    border: 1px solid black;
+}
+.lab-table th, .lab-table td {
+    border: 1px solid black;
+    padding: 8px 15px;
+    text-align: center;
+}
+
+/* 3. تخصيص جدول الفواكه (الصغير والمزدوج) */
+.fruit-table {
+    width: auto !important;     /* يلم على نفسه ويكون صغير */
+    border-collapse: separate !important; /* حدود مزدوجة */
+    border-spacing: 2px;
+}
+.fruit-table th {
+    background-color: white !important; /* خلفية بيضاء */
+}
+
+/* 4. تخصيص جدول الجمال (العريض والمدمج) */
+.camel-table {
+    width: 85% !important;      /* عريض مثل الصورة */
+    border-collapse: collapse !important; /* حدود خط واحد نحيف */
+}
+.camel-table th {
+    background-color: #f2f2f2 !important; /* خلفية رمادية خفيفة للرؤوس */
+    font-weight: bold;
+}
+
+/* 5. تنسيق الصورة */
+.table-img {
+    width: 230px;
+    height: auto;
+    display: block;
+    margin: auto;
+}
