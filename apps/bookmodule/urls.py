@@ -11,5 +11,7 @@ path('text/formatting/', views.formatting, name='formatting'),
 path('html5/listing/', views.listing, name='listing'),
 path('html5/tables/', views.tables, name='tables'),
 path('search/', views.search, name='books.search'),
+path('simple/query', views.simple_query, name='books.simple_query'),
+path('complex/query', views.complex_query, name='books.complex_query'),
 ]
 

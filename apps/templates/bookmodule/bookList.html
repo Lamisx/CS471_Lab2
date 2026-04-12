@@ -5,8 +5,9 @@
 
     {% if books %}
         <ul>
-        {% for book in books %}
-            <li>{{ book.title }} - {{ book.author }} (ID: {{ book.id }})</li>
+        {% for obj in books %}
+        ID: {{obj.id}}, Title: {{obj.title}}
+    <hr>
         {% endfor %}
         </ul>
     {% else %}
