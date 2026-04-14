@@ -1,0 +1,14 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Task 2{% endblock %}
+
+{% block content %}
+<h1>Task 2: Books (Edition > 3 AND (Title or Author contains 'qu'))</h1>
+
+{% for obj in books %}
+    ID: {{ obj.id }} | Title: {{ obj.title }} | Price: {{ obj.price }} | Edition: {{ obj.edition }}<hr>
+{% empty %}
+    <p>No books found matching these criteria.</p>
+{% endfor %}
+
+{% endblock %}
