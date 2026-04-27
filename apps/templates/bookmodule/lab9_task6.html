@@ -1,0 +1,28 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Task 6{% endblock %}
+
+{% block content %}
+<h1>Publishers & Specific Filtered Books</h1>
+
+<table border="1">
+    <tr>
+        <th>Publisher Name</th>
+        <th>Location</th>
+        <th>Filtered Books Count (Price > 50 & 1 <= Qty < 5)</th>
+    </tr>
+
+    {% for pub in publishers %}
+    <tr>
+        <td>{{ pub.name }}</td>
+        <td>{{ pub.location }}</td>
+        <td>{{ pub.filtered_books_count }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="3">No publishers found.</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
