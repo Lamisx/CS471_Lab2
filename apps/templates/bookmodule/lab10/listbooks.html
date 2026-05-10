@@ -1,0 +1,81 @@
+# lab 10 part 1 - task 1
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block title %}List of Books{% endblock title %}
+
+{% block content %}
+
+<h1>Books List</h1>
+
+<a href="{% url 'add_book' %}">Add New Book-P1</a>
+<br><br>
+<a href="{% url 'add_book_form' %}">Add New Book-P2</a>
+<br><br>
+<table border="1" cellpadding="10">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Publisher</th>
+            <th>Authors</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for book in books %}
+        <tr>
+            <td>{{ book.id }}</td>
+            <td>{{ book.title }}</td>
+            <td>{{ book.price }}</td>
+            <td>{{ book.quantity }}</td>
+            <td>
+                {% if book.publisher %}
+                    {{ book.publisher.name }}
+                {% else %}
+                    No Publisher
+                {% endif %}
+            </td>
+            <td>
+                {% if book.authors.all %}
+                    {% for author in book.authors.all %}
+                        {{ author.name }}<br>
+                    {% endfor %}
+                {% else %}
+                    No Authors
+                {% endif %}
+            </td>
+           <td>
+    <!-- PART 1 -->
+    <a href="{% url 'edit_book' book.id %}"
+       style="background-color: #28a745; color: white; padding: 5px 10px; text-decoration: none;">
+       Edit (P1)
+    </a>
+
+    <a href="{% url 'delete_book' book.id %}"
+       style="background-color: #dc3545; color: white; padding: 5px 10px; text-decoration: none;">
+       Delete (P1)
+    </a>
+
+    <br><br>
+
+    <!-- PART 2 -->
+    <a href="{% url 'edit_book_form' book.id %}"
+       style="background-color: #007bff; color: white; padding: 5px 10px; text-decoration: none;">
+       Edit (P2)
+    </a>
+</td>
+            
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="7">No books available</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock content %}

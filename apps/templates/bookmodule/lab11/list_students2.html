@@ -1,0 +1,31 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+<h2>Students List (Many-to-Many)</h2>
+<a href="{% url 'add_student2' %}">Add New Student</a>
+<table border="1">
+    <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Cities</th>
+        <th>Actions</th>
+    </tr>
+    {% for s in students %}
+    <tr>
+        <td>{{ s.name }}</td>
+        <td>{{ s.age }}</td>
+        <td>
+            {% for addr in s.addresses.all %}
+                {{ addr.city }}{% if not forloop.last %}, {% endif %}
+            {% empty %}
+                No Cities
+            {% endfor %}
+        </td>
+        <td>
+            <a href="{% url 'update_student2' s.pk %}">Edit</a> | 
+            <a href="{% url 'delete_student2' s.pk %}">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

@@ -1,7 +1,14 @@
 {% with request.resolver_match.url_name as url_name %}
 <div class="topnav">
- <a class="{% if url_name == 'books.index' %}active{% endif %}" href="{% url "books.index" %}">Home</a>
- <a class="{% if url_name == 'books.list_books' %}active{% endif %}" href="{% url "books.list_books" %}">List Books</a>
- <a class="{% if url_name == 'books.aboutus' %}active{% endif %}" href="{% url "books.aboutus" %}">About</a>
+    <a class="{% if url_name == 'books.index' %}active{% endif %}" href="{% url 'books.index' %}">Home</a>
+    <a class="{% if url_name == 'books.list_books' %}active{% endif %}" href="{% url 'books.list_books' %}">Books</a>
+    
+    <a class="{% if url_name == 'list_students' %}active{% endif %}" href="{% url 'list_students' %}">Students</a>
+    <a class="{% if url_name == 'list_students2' %}active{% endif %}" href="{% url 'list_students2' %}">Students M2M</a>
+    
+    <a class="{% if url_name == 'list_images' %}active{% endif %}" href="{% url 'list_images' %}">Images Gallery</a>
+    <a class="{% if url_name == 'upload_image' %}active{% endif %}" href="{% url 'upload_image' %}">Upload Image</a>
+    
+    <a class="{% if url_name == 'books.aboutus' %}active{% endif %}" href="{% url 'books.aboutus' %}">About</a>
 </div>
 {% endwith %}

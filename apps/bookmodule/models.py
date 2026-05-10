@@ -20,7 +20,7 @@ class Book(models.Model):
     def __str__(self):
         return self.title
 
-    
+
 class Address(models.Model):
     city = models.CharField(max_length=100)
 
@@ -34,3 +34,24 @@ class Student(models.Model):
 
     def __str__(self):
         return self.name
+
+class Address2(models.Model):
+    city = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.city
+class Student2(models.Model):
+    name = models.CharField(max_length=100)
+    age = models.IntegerField()
+    addresses = models.ManyToManyField(Address2)
+
+    def __str__(self):
+        return self.name
+
+class ImageModel(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    image = models.ImageField(upload_to='images/')
+
+    def __str__(self):
+        return self.title

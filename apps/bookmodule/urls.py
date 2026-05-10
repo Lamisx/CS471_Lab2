@@ -1,5 +1,8 @@
 from django.urls import path
+from django.conf.urls.static import static
+from django.conf import settings
 from . import views
+
 urlpatterns = [
  path('index2/<int:val1>/', views.index2),
  path('', views.index, name= "books.index"),
@@ -25,5 +28,23 @@ path('lab9/task3/', views.lab9_task3, name='lab9_task3'),
 path('lab9/task4/', views.lab9_task4, name='lab9_task4'),
 path('lab9/task5/', views.lab9_task5, name='lab9_task5'),
 path('lab9/task6/', views.lab9_task6, name='lab9_task6'),
+path('lab10_part1/listbooks', views.list_books, name='listbooks'),
+path('lab10_part1/addbook', views.add_book, name='add_book'),
+path('lab10_part1/editbook/<int:id>', views.edit_book, name='edit_book'),
+path('lab10_part1/deletebook/<int:id>', views.delete_book, name='delete_book'),
+path('lab10_part2/addbook', views.add_book_form, name='add_book_form'),
+path('lab10_part2/editbook/<int:id>', views.edit_book_form, name='edit_book_form'),
+path('lab11/liststudents', views.list_students, name='list_students'),
+path('lab11/addstudent', views.add_student, name='add_student'),
+path('lab11/updatestudent/<int:id>', views.update_student, name='update_student'),
+path('lab11/deletestudent/<int:id>', views.delete_student, name='delete_student'),
+path('lab11/liststudents2', views.list_students2, name='list_students2'),
+path('lab11/addstudent2', views.add_student2, name='add_student2'),
+path('lab11/updatestudent2/<int:id>', views.update_student2, name='update_student2'),
+path('lab11/deletestudent2/<int:id>', views.delete_student2, name='delete_student2'),
+path('lab11/upload_image', views.upload_image, name='upload_image'),
+path('lab11/list_images', views.list_images, name='list_images'),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
