@@ -1,18 +1,24 @@
 {% extends "layouts/base.html" %}
+{% load static %}
 
 {% block title %}Task 5{% endblock %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{% static 'tables_data.css' %}">
+{% endblock %}
 
 {% block content %}
-<h1>Task 5: Books Statistics</h1>
-
-<ul>
-    <li><strong>Number of books:</strong> {{ stats.total_books }}</li>
-    <li><strong>Total price of all books:</strong> {{ stats.total_price }}</li>
-    <li><strong>Average price:</strong> {{ stats.avg_price|stringformat:".2f" }}</li>
-    <li><strong>Maximum price:</strong> {{ stats.max_price }}</li>
-    <li><strong>Minimum price:</strong> {{ stats.min_price }}</li>
-</ul>
-
-<hr>
-<a href="{% url 'books.index' %}">Back to Home</a>
+<div class="container">
+    <h2><i class="fa fa-bar-chart"></i> Books Statistics</h2>
+    <div class="table-container" style="padding: 30px;">
+        <ul style="list-style: none; line-height: 2.5;">
+            <li><strong><i class="fa fa-book"></i> Number of books:</strong> {{ stats.total_books }}</li>
+            <li><strong><i class="fa fa-money"></i> Total price:</strong> {{ stats.total_price }}</li>
+            <li><strong><i class="fa fa-calculator"></i> Average price:</strong> {{ stats.avg_price|stringformat:".2f" }}</li>
+            <li><strong><i class="fa fa-arrow-up"></i> Maximum price:</strong> {{ stats.max_price }}</li>
+            <li><strong><i class="fa fa-arrow-down"></i> Minimum price:</strong> {{ stats.min_price }}</li>
+        </ul>
+        <hr>
+        <a href="{% url 'books.index' %}" class="action-link edit-btn">Back to Home</a>
+    </div>
+</div>
 {% endblock %}

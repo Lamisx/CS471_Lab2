@@ -1,28 +1,37 @@
 {% extends "layouts/base.html" %}
+{% load static %}
 
 {% block title %}Task 6{% endblock %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{% static 'tables_data.css' %}">
+{% endblock %}
 
 {% block content %}
-<h1>Publishers & Specific Filtered Books</h1>
-
-<table border="1">
-    <tr>
-        <th>Publisher Name</th>
-        <th>Location</th>
-        <th>Filtered Books Count (Price > 50 & 1 <= Qty < 5)</th>
-    </tr>
-
-    {% for pub in publishers %}
-    <tr>
-        <td>{{ pub.name }}</td>
-        <td>{{ pub.location }}</td>
-        <td>{{ pub.filtered_books_count }}</td>
-    </tr>
-    {% empty %}
-    <tr>
-        <td colspan="3">No publishers found.</td>
-    </tr>
-    {% endfor %}
-</table>
-
+<div class="container">
+    <h2><i class="fa fa-filter"></i> Filtered Books (Price > 50 & 1 <= Qty < 5)</h2>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Publisher Name</th>
+                    <th>Location</th>
+                    <th style="text-align: center;">Filtered Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pub in publishers %}
+                <tr>
+                    <td style="font-weight: 600;">{{ pub.name }}</td>
+                    <td>{{ pub.location }}</td>
+                    <td style="text-align: center;">
+                        <span style="background: #f4f6f7; color: #34495e; padding: 5px 15px; border-radius: 20px; font-weight: bold;">
+                            {{ pub.filtered_books_count }}
+                        </span>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock %}

@@ -1,30 +1,31 @@
 {% extends "layouts/base.html" %}
-
-{% block title %}Task 4{% endblock %}
+{% load static %}
+{% block stylesheets %}<link rel="stylesheet" href="{% static 'tables_data.css' %}">{% endblock %}
 
 {% block content %}
-<h1>Publishers & Price Statistics</h1>
-
-<table border="1">
-    <tr>
-        <th>Publisher Name</th>
-        <th>Avg Price</th>
-        <th>Min Price</th>
-        <th>Max Price</th>
-    </tr>
-
-    {% for pub in publishers %}
-    <tr>
-        <td>{{ pub.name }}</td>
-        <td>{{ pub.avg_price|floatformat:2|default:"0.00" }}</td>
-        <td>{{ pub.min_price|default:"0.00" }}</td>
-        <td>{{ pub.max_price|default:"0.00" }}</td>
-    </tr>
-    {% empty %}
-    <tr>
-        <td colspan="4">No publishers found.</td>
-    </tr>
-    {% endfor %}
-</table>
-
+<div class="container">
+    <h2>Publisher Price Analysis</h2>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Publisher</th>
+                    <th>Avg Price</th>
+                    <th>Min Price</th>
+                    <th>Max Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pub in publishers %}
+                <tr>
+                    <td style="font-weight: 600;">{{ pub.name }}</td>
+                    <td>{{ pub.avg_price|floatformat:2 }}</td>
+                    <td style="color: #e74c3c;">{{ pub.min_price }}</td>
+                    <td style="color: #27ae60;">{{ pub.max_price }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock %}

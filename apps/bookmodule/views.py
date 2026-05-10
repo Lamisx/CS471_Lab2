@@ -84,10 +84,10 @@ def lab8_task1(request):
     mybooks = Book.objects.filter(Q(price__lte=80))
     return render(request, 'bookmodule/lab8_task1.html', {'books': mybooks})
 def lab8_task2(request):
-    mybooks = Book.objects.filter(Q(edition__gt=3) & (Q(title__icontains='qu') | Q(author__icontains='qu')))
+    mybooks = Book.objects.filter(Q(rating__gt=3) & (Q(title__icontains='qu') | Q(authors__name__icontains='qu')))    
     return render(request, 'bookmodule/lab8_task2.html', {'books': mybooks})
 def lab8_task3(request):
-    mybooks = Book.objects.filter(~Q(edition__gt=3) & ~(Q(title__icontains='qu') | Q(author__icontains='qu')))
+    mybooks = Book.objects.filter(~Q(rating__gt=3) & ~(Q(title__icontains='qu') | Q(authors__name__icontains='qu')))
     return render(request, 'bookmodule/lab8_task3.html', {'books': mybooks})
 def lab8_task4(request):
     mybooks = Book.objects.all().order_by('title')

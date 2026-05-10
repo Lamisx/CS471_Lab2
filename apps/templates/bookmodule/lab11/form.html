@@ -1,12 +1,57 @@
 {% extends "layouts/base.html" %}
+{% load static %}
+
+{% block title %}{{ form_title }}{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{% static 'tables_data.css' %}">
+<style>
+    .form-card {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+        max-width: 500px;
+        margin: 40px auto;
+        border-top: 5px solid #3498db;
+    }
+    .form-card h2 { color: #2c3e50; text-align: center; margin-bottom: 25px; }
+    /* تنسيق حقول Django as_p */
+    .form-card p { margin-bottom: 15px; }
+    .form-card label { display: block; font-weight: bold; margin-bottom: 5px; color: #34495e; }
+    .form-card input, .form-card select {
+        width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box;
+    }
+    .form-card select[multiple] { height: 120px; } /* لتسهيل الاختيار المتعدد */
+    
+    .btn-save {
+        background: #3498db; color: white; border: none; padding: 12px 30px;
+        border-radius: 25px; cursor: pointer; width: 100%; font-size: 16px; font-weight: bold;
+        margin-top: 10px; transition: 0.3s;
+    }
+    .btn-save:hover { background: #2980b9; }
+    .nav-links { text-align: center; margin-top: 20px; display: flex; justify-content: center; gap: 15px; }
+    .nav-links a { text-decoration: none; color: #7f8c8d; font-size: 0.9em; }
+</style>
+{% endblock %}
 
 {% block content %}
-  <h2>{{ form_title }}</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save</button>
-  </form>
-  <a href="{% url 'list_students' %}">Back to List</a>
-  <a href="{% url 'list_students2' %}">Back to List 2</a>
+<div class="container">
+    <div class="form-card">
+        <h2>{{ form_title }}</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn-save">
+                <i class="fa fa-save"></i> Save Data
+            </button>
+        </form>
+        
+        <div class="nav-links">
+            <a href="{% url 'list_students' %}"><i class="fa fa-list"></i> Task 1 List</a>
+            <span>|</span>
+            <a href="{% url 'list_students2' %}"><i class="fa fa-users"></i> Task 2 List</a>
+        </div>
+    </div>
+</div>
 {% endblock %}

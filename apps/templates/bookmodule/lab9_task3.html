@@ -1,30 +1,36 @@
 {% extends "layouts/base.html" %}
+{% load static %}
 
 {% block title %}Task 3{% endblock %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{% static 'tables_data.css' %}">
+{% endblock %}
 
 {% block content %}
-<h1>Publishers & Oldest Book Date</h1>
-
-<table border="1">
-    <tr>
-        <th>Publisher Name</th>
-        <th>Location</th>
-        <th>Oldest Book Publication Date</th>
-    </tr>
-
-    {% for pub in publishers %}
-    <tr>
-        <td>{{ pub.name }}</td>
-        <td>{{ pub.location }}</td>
-        <td>
-            {{ pub.oldest_book_date|date:"Y-m-d"|default:"No books available" }}
-        </td>
-    </tr>
-    {% empty %}
-    <tr>
-        <td colspan="3">No publishers found.</td>
-    </tr>
-    {% endfor %}
-</table>
-
+<div class="container">
+    <h2><i class="fa fa-history"></i> Publishers & Oldest Book Date</h2>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Publisher Name</th>
+                    <th>Location</th>
+                    <th>Oldest Publication Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pub in publishers %}
+                <tr>
+                    <td style="font-weight: 600;">{{ pub.name }}</td>
+                    <td>{{ pub.location }}</td>
+                    <td>
+                        <i class="fa fa-calendar" style="color: #95a5a6;"></i> 
+                        {{ pub.oldest_book_date|date:"Y-m-d"|default:"No books available" }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock %}

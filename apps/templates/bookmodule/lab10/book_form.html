@@ -1,17 +1,48 @@
 {% extends "layouts/base.html" %}
+{% load static %}
+
 {% block title %}Book Form{% endblock title %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{% static 'tables_data.css' %}">
+<style>
+    .django-form-card {
+        background: white;
+        padding: 40px;
+        border-radius: 15px;
+        max-width: 500px;
+        margin: 40px auto;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    .django-form-card p { margin-bottom: 20px; }
+    .django-form-card input, .django-form-card select {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
-<h1>{% if form.instance.pk %}Edit Book{% else %}Add New Book{% endif %}</h1>
+<div class="container">
+    <div class="django-form-card">
+        <h2 style="margin-bottom: 30px; color: #2c3e50;">
+            {% if form.instance.pk %} Edit Book {% else %} Add New Book {% endif %}
+        </h2>
+        
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
 
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-
-    <div style="margin-top: 20px;">
-        <button type="submit" style="background-color: green; color: white; padding: 10px 20px; border: none; cursor: pointer;">
-            Save
-        </button>
-        <a href="{% url 'listbooks' %}" style="margin-left: 10px;">Cancel</a>
+            <div style="margin-top: 30px; text-align: center;">
+                <button type="submit" style="background: #27ae60; color: white; padding: 12px 30px; border: none; border-radius: 25px; cursor: pointer; font-size: 16px;">
+                    <i class="fa fa-save"></i> Save Changes
+                </button>
+                <br><br>
+                <a href="{% url 'listbooks' %}" style="color: #e74c3c; text-decoration: none;">Cancel and Return</a>
+            </div>
+        </form>
     </div>
-</form>
+</div>
 {% endblock content %}

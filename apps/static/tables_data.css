@@ -1,0 +1,73 @@
+/* Glassmorphism & Soft Design for Tables */
+.table-container {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05); /* ظل خفيف جداً */
+    margin: 20px 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px; /* يعطي مسافة بين الصفوف كأنها كروت */
+    margin-top: -10px;
+}
+
+table th {
+    background-color: transparent;
+    color: #888; /* نص رمادي هادئ للعناوين */
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+table tbody tr {
+    background-color: #fff;
+    transition: all 0.3s ease;
+}
+
+table tbody tr td {
+    padding: 20px 15px;
+    color: #444;
+    border-bottom: 1px solid #f9f9f9;
+}
+
+/* تأثير عند تمرير الماوس على الصف */
+table tbody tr:hover {
+    background-color: #f8fbff;
+    transform: scale(1.01);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+
+/* ستايل الأزرار داخل الجدول */
+.action-link {
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.edit-btn { color: #3498db; background: #ebf5fb; }
+.edit-btn:hover { background: #3498db; color: #fff; }
+
+.delete-btn { color: #e74c3c; background: #fdf2f2; margin-left: 5px; }
+.delete-btn:hover { background: #e74c3c; color: #fff; }
+
+/* زر الإضافة العلوي */
+.add-student-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 15px rgba(44, 62, 80, 0.2);
+}

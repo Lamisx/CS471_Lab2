@@ -1,10 +1,85 @@
 {% extends "layouts/base.html" %}
+{% load static %}
+
+{% block title %}Upload Image - Lab 11{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{% static 'tables_data.css' %}">
+<style>
+    .upload-card {
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        max-width: 500px;
+        margin: 50px auto;
+        text-align: center;
+        border: 2px dashed #3498db; /* تمييز منطقة الرفع */
+    }
+    .upload-card h2 {
+        color: #2c3e50;
+        margin-bottom: 25px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .upload-card p {
+        margin-bottom: 20px;
+        text-align: left; /* لجعل تسميات الحقول واضحة */
+    }
+    /* تنسيق حقل الملفات الافتراضي من Django */
+    input[type="file"] {
+        background: #f8f9fa;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #dee2e6;
+        width: 100%;
+    }
+    .btn-upload {
+        background: linear-gradient(135deg, #3498db, #2980b9);
+        color: white;
+        border: none;
+        padding: 12px 35px;
+        border-radius: 30px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+        box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        width: 100%;
+        margin-top: 15px;
+    }
+    .btn-upload:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+    }
+    .back-link {
+        display: block;
+        margin-top: 20px;
+        color: #95a5a6;
+        text-decoration: none;
+        font-size: 0.9em;
+    }
+</style>
+{% endblock %}
 
 {% block content %}
-  <h2>Upload Image</h2>
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Upload</button>
-  </form>
+<div class="container">
+    <div class="upload-card">
+        <i class="fa fa-cloud-upload" style="font-size: 3em; color: #3498db; margin-bottom: 15px;"></i>
+        <h2>Upload New Image</h2>
+        
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div style="text-align: left;">
+                {{ form.as_p }}
+            </div>
+            <button type="submit" class="btn-upload">
+                <i class="fa fa-upload"></i> Upload Now
+            </button>
+        </form>
+        
+      <a href="{% url 'list_images' %}" class="back-link">
+          <i class="fa fa-arrow-left"></i> Back to Images Gallery
+      </a>
+    </div>
+</div>
 {% endblock %}

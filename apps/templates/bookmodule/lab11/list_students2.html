@@ -1,31 +1,81 @@
 {% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block title %}Students List (M2M){% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{% static 'tables_data.css' %}">
+<style>
+    .city-tag {
+        background: #e1f5fe;
+        color: #0288d1;
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-size: 0.85em;
+        margin: 2px;
+        display: inline-block;
+        border: 1px solid #b3e5fc;
+    }
+    .btn-edit { color: #3498db; text-decoration: none; font-weight: bold; }
+    .btn-delete { color: #e74c3c; text-decoration: none; font-weight: bold; margin-left: 10px; }
+</style>
+{% endblock %}
 
 {% block content %}
-<h2>Students List (Many-to-Many)</h2>
-<a href="{% url 'add_student2' %}">Add New Student</a>
-<table border="1">
-    <tr>
-        <th>Name</th>
-        <th>Age</th>
-        <th>Cities</th>
-        <th>Actions</th>
-    </tr>
-    {% for s in students %}
-    <tr>
-        <td>{{ s.name }}</td>
-        <td>{{ s.age }}</td>
-        <td>
-            {% for addr in s.addresses.all %}
-                {{ addr.city }}{% if not forloop.last %}, {% endif %}
-            {% empty %}
-                No Cities
-            {% endfor %}
-        </td>
-        <td>
-            <a href="{% url 'update_student2' s.pk %}">Edit</a> | 
-            <a href="{% url 'delete_student2' s.pk %}">Delete</a>
-        </td>
-    </tr>
-    {% endfor %}
-</table>
+<div class="container">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h2 style="color: #2c3e50;">Students List <small>(Many-to-Many)</small></h2>
+        <a href="{% url 'add_student2' %}" class="btn-save" style="width: auto; padding: 10px 20px; text-decoration: none;">
+            + Add New Student
+        </a>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Associated Cities</th>
+                    <th style="text-align: center;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for s in students %}
+                <tr>
+                    <td style="font-weight: 600;">{{ s.name }}</td>
+                    <td>{{ s.age }}</td>
+                    <td>
+                        {% for addr in s.addresses.all %}
+                            <span class="city-tag">{{ addr.city }}</span>
+                        {% empty %}
+                            <span style="color: #bdc3c7; font-style: italic;">No Cities assigned</span>
+                        {% endfor %}
+                    </td>
+                    <td style="text-align: center;">
+                        <a href="{% url 'update_student2' s.pk %}" class="btn-edit">
+                            <i class="fa fa-edit"></i> Edit
+                        </a>
+                        <a href="{% url 'delete_student2' s.pk %}" class="btn-delete" onclick="return confirm('Are you sure?')">
+                            <i class="fa fa-trash"></i> Delete
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" style="text-align: center; padding: 30px; color: #95a5a6;">
+                        No students found in the database.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    <div style="margin-top: 20px;">
+        <a href="{% url 'list_students' %}" style="color: #7f8c8d; text-decoration: none;">
+            <i class="fa fa-arrow-left"></i> View Task 1 (One-to-Many)
+        </a>
+    </div>
+</div>
 {% endblock %}

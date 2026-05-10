@@ -1,0 +1,86 @@
+/* Container and Card Setup */
+.form-card {
+    background: #ffffff;
+    max-width: 650px;
+    margin: 40px auto;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f1f5f9;
+}
+
+.form-card h2, .form-card h1 {
+    color: #2c3e50;
+    margin-bottom: 25px;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+/* Fields Styling */
+form p {
+    margin-bottom: 20px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+form input[type="text"],
+form input[type="number"],
+form input[type="datetime-local"],
+form select,
+form textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 1rem;
+    color: #334155;
+    transition: all 0.3s ease;
+    box-sizing: border-box; /* يمنع خروج الحقل عن الحاوية */
+}
+
+form input:focus, form select:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.1);
+}
+
+/* Multi-select styling */
+form select[multiple] {
+    height: 120px;
+}
+
+/* Buttons */
+.btn-save {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: inline-block;
+}
+
+.btn-save:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+.btn-cancel {
+    color: #94a3b8;
+    text-decoration: none;
+    margin-left: 15px;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+
+.btn-cancel:hover {
+    color: #e74c3c;
+}

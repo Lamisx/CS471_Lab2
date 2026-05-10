@@ -1,54 +1,82 @@
 {% extends "layouts/base.html" %}
+{% load static %}
 
 {% block title %}Add New Book{% endblock title %}
 
+{% block stylesheets %}
+<link rel="stylesheet" href="{% static 'tables_data.css' %}"> <style>
+    .form-card {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+        max-width: 600px;
+        margin: 20px auto;
+    }
+    .form-group { margin-bottom: 15px; }
+    label { font-weight: bold; color: #2c3e50; display: block; margin-bottom: 5px; }
+    input, select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-sizing: border-box;
+    }
+    .btn-save { background-color: #27ae60; color: white; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+    .btn-cancel { color: #7f8c8d; text-decoration: none; margin-left: 15px; }
+</style>
+{% endblock %}
+
 {% block content %}
-<h1>Add a New Book</h1>
+<div class="container">
+    <div class="form-card">
+        <h2 style="text-align: center; color: #2c3e50; margin-bottom: 25px;">Add a New Book</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>Title:</label>
+                <input type="text" name="title" placeholder="Enter book title" required>
+            </div>
+            <div class="form-group">
+                <label>Price:</label>
+                <input type="number" step="0.01" name="price" required>
+            </div>
+            <div class="form-group">
+                <label>Quantity:</label>
+                <input type="number" name="quantity" value="1" required>
+            </div>
+            <div class="form-group">
+                <label>Publication Date:</label>
+                <input type="datetime-local" name="pubdate" required>
+            </div>
+            <div class="form-group">
+                <label>Rating (1-5):</label>
+                <input type="number" name="rating" min="1" max="5" value="1">
+            </div>
+            <div class="form-group">
+                <label>Publisher:</label>
+                <select name="publisher" required>
+                    <option value="">-- Select Publisher --</option>
+                    {% for pub in publishers %}
+                        <option value="{{ pub.id }}">{{ pub.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Authors:</label>
+                <select name="authors" multiple required style="height: 100px;">
+                    {% for author in authors %}
+                        <option value="{{ author.id }}">{{ author.name }}</option>
+                    {% endfor %}
+                </select>
+                <small style="color: #95a5a6;">Hold Ctrl to select multiple</small>
+            </div>
 
-<form method="POST" >
-    {% csrf_token %} 
-    <p>
-        <label>Title:</label><br>
-        <input type="text" name="title" required >
-    </p>
-    <p>
-        <label>Price:</label><br>
-        <input type="number" step="0.01" name="price" required 
-    </p>
-    <p>
-        <label>Quantity:</label><br>
-        <input type="number" name="quantity" value="1" required >
-    </p>
-    <p>
-        <label>Publication Date:</label><br>
-        <input type="datetime-local" name="pubdate" required >
-    </p>
-    <p>
-        <label>Rating (1-5):</label><br>
-        <input type="number" name="rating" min="1" max="5" value="1" >
-    </p>
-    <p>
-        <label>Publisher:</label><br>
-        <select name="publisher" required >
-            <option value="">-- Select Publisher --</option>
-            {% for pub in publishers %}
-                <option value="{{ pub.id }}">{{ pub.name }}</option>
-            {% endfor %}
-        </select>
-    </p>
-    <p>
-        <label>Authors :</label><br>
-        <select name="authors" multiple required >
-            {% for author in authors %}
-                <option value="{{ author.id }}">{{ author.name }}</option>
-            {% endfor %}
-        </select>
-    </p>
-
-    <button type="submit" style="background-color: #007bff; color: white; padding: 10px 20px; border: none; cursor: pointer; border-radius: 4px;">
-        Save Book
-    </button>
-    <a href="{% url 'listbooks' %}" style="margin-left: 15px; text-decoration: none; color: #666;">Cancel</a>
-</form>
-
+            <div style="text-align: center; margin-top: 20px;">
+                <button type="submit" class="btn-save">Save Book</button>
+                <a href="{% url 'listbooks' %}" class="btn-cancel">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock content %}

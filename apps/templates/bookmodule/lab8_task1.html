@@ -1,13 +1,37 @@
 {% extends "layouts/base.html" %}
+{% load static %}
+
 {% block title %}Task 1{% endblock %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{% static 'tables_data.css' %}">
+{% endblock %}
 
 {% block content %}
-<h1>Task 1: Books with price <= 80</h1>
-
-{% for obj in books %}
-    ID: {{ obj.id }} | Title: {{ obj.title }} | Price: {{ obj.price }} | Edition: {{ obj.edition }}<hr>
-{% empty %}
-    <p>No books found with price less than or equal to 80.</p>
-{% endfor %}
-
+<div class="container">
+    <h2>Task 1: Books with price <= 80</h2>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Price</th>
+                    <th>Rating</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for obj in books %}
+                <tr>
+                    <td>{{ obj.id }}</td>
+                    <td>{{ obj.title }}</td>
+                    <td>{{ obj.price }}</td>
+                    <td>{{ obj.rating }}</td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="4">No books found.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock %}

@@ -1,26 +1,114 @@
 {% extends "layouts/base.html" %}
+{% load static %}
+
+{% block title %}Images Gallery{% endblock title %}
+
+{% block stylesheets %}
+<style>
+    /* نظام الشبكة للجاليري */
+    .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* يضمن توزيع الكروت تلقائياً */
+        gap: 25px;
+        padding: 20px 0;
+    }
+
+    /* تنسيق الكرت */
+    .gallery-card {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 1px solid #eee;
+    }
+
+    .gallery-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+
+    /* حاوية الصورة لضمان ثبات الحجم */
+    .card-img-container {
+        height: 180px;
+        width: 100%;
+        overflow: hidden;
+        background-color: #f8f9fa;
+    }
+
+    .card-img-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* هذا يمنع تمطط الصورة */
+    }
+
+    .card-body {
+        padding: 15px;
+    }
+
+    .card-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 8px;
+        display: block;
+    }
+
+    .card-text {
+        font-size: 0.85rem;
+        color: #7f8c8d;
+        line-height: 1.4;
+    }
+
+    .btn-back {
+        display: inline-block;
+        margin-top: 30px;
+        color: #3498db;
+        text-decoration: none;
+        font-weight: 500;
+    }
+</style>
+{% endblock stylesheets %}
 
 {% block content %}
-<h2>Images Gallery</h2>
-<a href="{% url 'upload_image' %}">Upload New Image</a>
-<hr>
-<div style="display: flex; flex-wrap: wrap; gap: 20px;">
-    {% for img in images %}
-    <div style="border: 1px solid #ccc; padding: 10px; width: 200px;">
-        <h4>{{ img.title }}</h4>
-        
-        {% if img.image %}
-            <img src="{{ img.image.url }}" alt="{{ img.title }}" style="width: 100%; height: auto;">
-        {% else %}
-            <div style="background: #eee; height: 150px; display: flex; align-items: center; justify-content: center;">
-                No Image
-            </div>
-        {% endif %}
-        
-        <p>{{ img.description }}</p>
+<div class="container">
+    <div class="gallery-header" style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+        <h2 style="color: #2c3e50;"><i class="fa fa-image"></i> Images Gallery</h2>
+        <a href="{% url 'upload_image' %}" class="btn-upload" style="background-color: #3498db; color: white; padding: 10px 22px; border-radius: 30px; text-decoration: none; font-weight: bold; box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);">
+            <i class="fa fa-plus"></i> Upload New Image
+        </a>
     </div>
-    {% empty %}
-    <p>No images uploaded yet.</p>
-    {% endfor %}
+    
+    <hr style="opacity: 0.1; margin: 20px 0;">
+
+    <div class="gallery-grid">
+        {% for img in images %}
+        <div class="gallery-card">
+            <div class="card-img-container">
+                {% if img.image %}
+                    <img src="{{ img.image.url }}" alt="{{ img.title }}">
+                {% else %}
+                    <div style="height: 100%; display: flex; align-items: center; justify-content: center; background: #f1f1f1;">
+                        <i class="fa fa-picture-o" style="font-size: 2rem; color: #ccc;"></i>
+                    </div>
+                {% endif %}
+            </div>
+            
+            <div class="card-body">
+                <span class="card-title">{{ img.title }}</span>
+                <p class="card-text">{{ img.description|truncatewords:8 }}</p>
+            </div>
+        </div>
+        {% empty %}
+        <div style="grid-column: 1 / -1; text-align: center; padding: 60px; background: #fdfdfd; border-radius: 15px; border: 2px dashed #eee;">
+            <i class="fa fa-folder-open-o" style="font-size: 3.5rem; color: #ddd;"></i>
+            <p style="color: #aaa; margin-top: 15px; font-size: 1.1rem;">No images uploaded yet.</p>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <a href="{% url 'books.index' %}" class="btn-back">
+        <i class="fa fa-arrow-left"></i> Back to Home
+    </a>
 </div>
-{% endblock %}
+{% endblock content %}
